@@ -8,8 +8,12 @@ import java.util.Scanner;
 
 public class FileOperation {
     public void createFile(){
+        System.out.println("Enter the name of the file you want to create");
         try {
-            File myFile = new File("D:\\Project\\FileManager\\src\\Testing\\Test.txt");
+            Scanner scanner=new Scanner(System.in);
+            String filename=scanner.nextLine();
+
+            File myFile = new File(filename);
             if (myFile.createNewFile()) {
                 System.out.println("File created successfully");
             } else {
@@ -32,9 +36,14 @@ public class FileOperation {
     }
 
     public void fileWrite() {
+        System.out.println("Enter the file name you want to edit");
      try {
-         FileWriter myFile = new FileWriter("Test.txt");
-         myFile.write("Nitya is a Good Boy");
+         Scanner scanner=new Scanner(System.in);
+         String fileEdit=scanner.nextLine();
+         FileWriter myFile = new FileWriter(fileEdit);
+         System.out.println("Enter the content you want to add in the file");
+         String content=scanner.nextLine();
+         myFile.write(content);
          myFile.close();
      }catch (IOException e) {
          System.out.println("exception occurred ");
@@ -43,17 +52,30 @@ public class FileOperation {
 
     }
 
-    public void readOps() throws FileNotFoundException {
-        File myFile= new File("Test.txt");
-        Scanner fileReader= new Scanner(myFile);
-        while(fileReader.hasNextLine()){
-            String data= fileReader.nextLine();
-            System.out.println("The content inside file are "+ data);
+    public void readOps() {
+        System.out.println("Enter the file name which you want to read ");
+        try {
+            Scanner scanner=new Scanner(System.in);
+            String readContent=scanner.nextLine();
+            File myFile = new File(readContent);
+            Scanner fileReader = new Scanner(myFile);
+            while (fileReader.hasNextLine()) {
+                String data = fileReader.nextLine();
+                System.out.println("The content inside file are " + data);
+
+            }
+        }catch (FileNotFoundException e){
+            System.out.println("Exception occurred");
+            e.printStackTrace();
         }
     }
 
     public void deleteFile(){
-        File myFile= new File("Test.txt");
+        System.out.println("Enter the file name which you want to delete");
+        Scanner scanner=new Scanner(System.in);
+        String input= scanner.nextLine();
+
+        File myFile= new File(input);
         if(myFile.delete()){
             System.out.println(myFile + "file deleted successfully");
         }else {
